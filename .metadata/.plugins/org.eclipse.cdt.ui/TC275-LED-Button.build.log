@@ -1,0 +1,23 @@
+15:43:34 **** Incremental Build of configuration TriCore Debug (TASKING) for project TC275-LED-Button ****
+amk -j8 all 
+TASKING VX-toolset for AURIX Development Studio (non-commercial): program builder v1.1r8 Build 22011964
+Building target: TC275-LED-Button.elf
+Invoking: TASKING Linker
+cctc -f .TC275-LED-Button.elf.opt
+ltc E106: unresolved external: IfxPort_setPinMode - (Blinky_LED.o)
+ltc E106: unresolved external: IfxScuCcu_getSourceFrequency - (Blinky_LED.o)
+ltc E106: unresolved external: IfxCpu_emitEvent - (Cpu0_Main.o)
+ltc E106: unresolved external: waitTime - (Blinky_LED.o)
+ltc E106: unresolved external: IfxScuWdt_getSafetyWatchdogPassword - (Cpu0_Main.o)
+ltc E106: unresolved external: IfxScuWdt_getCpuWatchdogPassword - (Cpu0_Main.o)
+ltc E106: unresolved external: IfxScuWdt_disableCpuWatchdog - (Cpu0_Main.o)
+ltc E106: unresolved external: IfxScuWdt_disableSafetyWatchdog - (Cpu0_Main.o)
+amk E452: ["makefile" 71/0] target 'TC275-LED-Button.elf' returned exit code 1
+amk E451: make stopped
+ltc E106: unresolved external: IfxCpu_waitEvent - (Cpu0_Main.o)
+ltc E106: unresolved external: main - (cstart.o)
+ltc F019: unrecoverable error: fatal link error
+"amk -j8 all" terminated with exit code 1. Build might be incomplete.
+
+15:43:34 Build Failed. 13 errors, 0 warnings. (took 203ms)
+
