@@ -1,0 +1,46 @@
+# Eclipse IDE 관련
+.metadata/
+.settings/
+.project
+.cproject
+.loadpath
+.recommenders
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+
+# TASKING/AURIX 빌드 관련
+Debug/
+Release/
+*.o
+*.elf
+*.hex
+*.map
+*.lst
+*.lsl
+*.dep
+*.pdb
+
+# 디버그 설정
+*.launch
+TriCore\ Debug\ (TASKING)/
+
+# 임시 파일들
+*~
+*.orig
+*.rej
+
+# 로그 파일들
+*.log
+
+# OS 관련
+Thumbs.db
+.DS_Store
+
+# IDE 관련
+.vscode/
+.idea/
