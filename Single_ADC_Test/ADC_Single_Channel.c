@@ -53,7 +53,7 @@ MovingAverage_t g_adcMovingAverage;
 /*********************************************************************************************************************/
 
 /* Moving Average 초기화 함수 */
-void initMovingAverage(MovingAverage_t *ma, uint16 windowSize)
+void initMovingAverage(MovingAverage_t *ma, unsigned short windowSize)
 {
     ma->average = 0.0f;
     ma->windowSize = windowSize;
@@ -61,15 +61,15 @@ void initMovingAverage(MovingAverage_t *ma, uint16 windowSize)
 }
 
 /* Moving Average 업데이트 함수 */
-float updateMovingAverage(MovingAverage_t *ma, uint16 newSample)
+float updateMovingAverage(MovingAverage_t *ma, unsigned short newSample)
 {
-    if (ma->sampleCount < ma->windowSize)
+    if (ma->sampleCount < ma->windowSize) 
     {
         /* 초기 샘플들: 단순 평균 계산 */
         ma->average = (ma->average * ma->sampleCount + (float)newSample) / (ma->sampleCount + 1);
         ma->sampleCount++;
-    }
-    else
+    } 
+    else 
     {
         /* Recursive Moving Average 공식 적용 */
         ma->average = ma->average + ((float)newSample - ma->average) / ma->windowSize;
@@ -78,10 +78,10 @@ float updateMovingAverage(MovingAverage_t *ma, uint16 newSample)
     return ma->average;
 }
 
-/* 평활화된 값을 정수로 반환 (반올림) */
-uint16 getSmoothedValue(MovingAverage_t *ma)
+/* 평활화된 값을 정수로 반환 (LED 제어용) */
+unsigned short getSmoothedValue(MovingAverage_t *ma)
 {
-    return (uint16)(ma->average + 0.5f);  /* 반올림 */
+    return (unsigned short)(ma->average + 0.5f);  /* 반올림 */
 }
 
 /* The initialization of the port pins to control the LEDs is done by this function */
@@ -109,26 +109,26 @@ void indicateConversionValue(void)
     while (!conversionResult.B.VF);
 
     /* Update Moving Average with new ADC sample */
-    updateMovingAverage(&g_adcMovingAverage, (uint16)conversionResult.B.RESULT);
+    updateMovingAverage(&g_adcMovingAverage, (unsigned short)conversionResult.B.RESULT);
     
     /* Get smoothed value */
-    uint16 smoothedValue = getSmoothedValue(&g_adcMovingAverage);
+    unsigned short smoothedValue = getSmoothedValue(&g_adcMovingAverage);
 
     /* Control LEDs based on smoothed value */
-    if(smoothedValue < LIMIT_LOW)       /* LED1 lights up if the conversion value is smaller than 0x555 */
+    if(smoothedValue < LIMIT_LOW)       
     {
-        IfxPort_setPinLow(LED1);    /* LED1 ON */
-        IfxPort_setPinHigh(LED2);   /* LED2 OFF */
+        IfxPort_setPinLow(LED1);    /* LED1 on */
+        IfxPort_setPinHigh(LED2);   /* LED2 off */
     }
-    else if(smoothedValue > LIMIT_HIGH) /* LED2 lights up if the conversion value is greater than 0xAAA */
+    else if(smoothedValue > LIMIT_HIGH) 
     {
-        IfxPort_setPinHigh(LED1);   /* LED1 OFF */
-        IfxPort_setPinLow(LED2);    /* LED2 ON */
+        IfxPort_setPinHigh(LED1);   /* LED1 off */
+        IfxPort_setPinLow(LED2);    /* LED2 on */
     }
-    else                                /* LED1 and LED2 light up if the conversion value is in between */
+    else                                
     {
-        IfxPort_setPinLow(LED1);    /* LED1 ON */
-        IfxPort_setPinLow(LED2);    /* LED2 ON */
+        IfxPort_setPinLow(LED1);    /* Both LEDs on */
+        IfxPort_setPinLow(LED2);
     }
 }
 

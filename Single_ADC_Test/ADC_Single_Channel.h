@@ -48,8 +48,8 @@ typedef struct
 typedef struct
 {
     float average;          /* 현재 평균값 */
-    uint16 windowSize;      /* 윈도우 크기 */
-    uint16 sampleCount;     /* 현재 샘플 개수 */
+    unsigned short windowSize;      /* 윈도우 크기 */
+    unsigned short sampleCount;     /* 현재 샘플 개수 */
 } MovingAverage_t;
 
 /* 전역 변수 선언 */
@@ -64,8 +64,8 @@ void vadcBackgroundScanInit(void);
 void vadcBackgroundScanRun(void);
 
 /* Moving Average 함수 프로토타입 */
-void initMovingAverage(MovingAverage_t *ma, uint16 windowSize);
-float updateMovingAverage(MovingAverage_t *ma, uint16 newSample);
-uint16 getSmoothedValue(MovingAverage_t *ma);
+void initMovingAverage(MovingAverage_t *ma, unsigned short windowSize);
+float updateMovingAverage(MovingAverage_t *ma, unsigned short newSample);
+unsigned short getSmoothedValue(MovingAverage_t *ma);
 
 #endif /* ADC_SINGLE_CHANNEL_H_ */
